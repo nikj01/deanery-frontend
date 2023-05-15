@@ -1,19 +1,21 @@
-import React, {useContext, useState} from 'react';
-import axios from "../helpers/axios_helper.jsx";
-import {Alert, AlertTitle, Box, Button, Container, Input, Slide, Snackbar, TextField, Typography} from "@mui/material";
-import {AuthContext} from "../context/index.jsx";
-import {redirect} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import axios from "../../../api/axios_helper.jsx";
+import {Alert, AlertTitle, Box, Button, Container, Slide, Snackbar, TextField, Typography} from "@mui/material";
+import {Navigate} from "react-router-dom";
+import {useAuth} from "../../../context/hooks/useAuth.jsx";
 
 const Login = () => {
-    const {isAuth, setIsAuth} = useContext(AuthContext);
+    const {isAuth, personId, login} = useAuth();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showAlert, setShowAlert] = useState(false);
-    const [snackPosition, setSnackPosition] = useState({
-        vertical: 'bottom',
-        horizontal: 'left'
-    });
+    const [redirect, setRedirect] = useState(false);
+
+    useEffect(() => {
+        if (isAuth && personId)
+            setRedirect(true)
+    }, [isAuth, personId]);
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -32,14 +34,8 @@ const Login = () => {
                     },
                     withCredentials: true
                 });
-            console.log(response.data)
-            console.log(response.status)
-            console.log(response.statusText)
-            console.log(response.headers)
-            console.log(response.config)
             if (response.status === 200) {
-                setIsAuth(true);
-                return redirect('/me');
+                login(true, username);
             }
             if (response.status === 401) {
                 setShowAlert(true);
@@ -49,6 +45,10 @@ const Login = () => {
             setShowAlert(true)
         }
     };
+
+    if (redirect) {
+        return <Navigate to='/me'/>;
+    }
 
     return (
         <>
@@ -124,7 +124,6 @@ const Login = () => {
                     autoHideDuration={5000}
                     TransitionComponent={Slide}
                     onClose={setShowAlert}
-                    // key={vertcal + horizontal}
                 >
                     <Alert
                         severity='error'

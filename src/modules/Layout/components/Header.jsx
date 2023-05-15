@@ -1,10 +1,10 @@
-import React, {useContext, useState} from 'react';
-import {AppBar, Drawer, IconButton, Toolbar, Typography} from "@mui/material";
+import React, {useContext} from 'react';
+import {AppBar, IconButton, Toolbar, Typography} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import {AuthContext} from "../context/index.jsx";
+import {AuthContext} from "../../../context/AuthContext.jsx";
 
-const Header = ({handleMenu, menu}) => {
-    const {isAuth, setIsAuth} = useContext(AuthContext);
+const Header = ({handleMenu}) => {
+    const {isAuth} = useContext(AuthContext);
 
     return (
         <>
