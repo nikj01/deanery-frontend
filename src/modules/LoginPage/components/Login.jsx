@@ -12,19 +12,24 @@ const Login = () => {
     const [showAlert, setShowAlert] = useState(false);
     const [redirect, setRedirect] = useState(false);
 
+    const changeRedirect = () => {
+        setRedirect(true);
+    }
+
     useEffect(() => {
         if (isAuth && personId)
-            setRedirect(true)
+            setTimeout(changeRedirect, 5000);
     }, [isAuth, personId]);
+
 
     const handleSubmit = async e => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(
-                '/login',
-                { username, password },
-                {auth: {
+            const response = await axios.post('/login',
+                {username, password},
+                {
+                    auth: {
                         username,
                         password
                     },
@@ -34,12 +39,13 @@ const Login = () => {
                     },
                     withCredentials: true
                 });
+
             if (response.status === 200) {
-                login(true, username);
+                login(true, username, password);
+                localStorage.setItem('auth', 'true')
             }
-            if (response.status === 401) {
-                setShowAlert(true);
-            }
+            if (response.status === 401) setShowAlert(true);
+
         } catch (error) {
             e.preventDefault();
             setShowAlert(true)
@@ -68,7 +74,7 @@ const Login = () => {
                     <Typography
                         component="h2"
                         variant="h5"
-                        sx={{ mt: 1 }}
+                        sx={{mt: 1}}
                     >
                         Електронний ДДМА
                     </Typography>
@@ -118,8 +124,9 @@ const Login = () => {
                 ?
                 <Snackbar
                     anchorOrigin={{
-                        vertical:'bottom',
-                        horizontal:'center' }}
+                        vertical: 'bottom',
+                        horizontal: 'center'
+                    }}
                     open={open}
                     autoHideDuration={5000}
                     TransitionComponent={Slide}
@@ -127,7 +134,7 @@ const Login = () => {
                 >
                     <Alert
                         severity='error'
-                        sx={{ width: '100%' }}>
+                        sx={{width: '100%'}}>
                         <AlertTitle>Помилка</AlertTitle>
                         <strong>Неправильне ім'я користувача або пароль</strong>
                     </Alert>

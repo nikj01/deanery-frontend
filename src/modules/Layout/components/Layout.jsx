@@ -3,11 +3,9 @@ import {Container} from "@mui/material";
 import {Outlet} from "react-router-dom";
 import Header from "./Header.jsx";
 import Menu from "./Menu.jsx";
-import {useAuth} from "../../../context/hooks/useAuth.jsx";
 
 const Layout = () => {
     const [isOpenMenu, setMenuOpen] = useState(false);
-    const {isAuth, personId} = useAuth();
 
     return (
         <>

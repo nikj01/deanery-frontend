@@ -4,22 +4,26 @@ import {AuthContext} from "./AuthContext.jsx";
 const AuthProvider = ({children}) => {
     const [isAuth, setIsAuth] = useState(false);
     const [personId, setPersonId] = useState(null);
+    const [password, setPassword] = useState(null);
 
-    const login = (isAuth, personId) => {
+    const login = (isAuth, personId, password) => {
         setIsAuth(isAuth);
         setPersonId(personId);
+        setPassword(password);
     }
-    const logout = (isAuth, personId) => {
+    const logout = () => {
         setIsAuth(false);
         setPersonId(null);
     }
 
-    const authValue = useMemo(() => {
-        return { isAuth, personId, login, logout };
-    }, [isAuth, personId]);
+    // const authValues = useMemo(() => {
+    //     return { isAuth, personId, login, logout };
+    // }, [isAuth, personId]);
+
+    const authValues = {isAuth, personId, password, login, logout};
 
     return (
-        <AuthContext.Provider value={authValue}>
+        <AuthContext.Provider value={authValues}>
             {children}
         </AuthContext.Provider>
     );
