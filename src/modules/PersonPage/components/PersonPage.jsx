@@ -1,10 +1,10 @@
-import {Button, Card, CardContent, CardHeader, TextField, Typography} from "@mui/material";
+import {Button, Card, CardActions, CardContent, CardHeader, Typography} from "@mui/material";
 import {usePerson} from "../store.jsx";
 import {useEffect} from "react";
 import {useAuth} from "../../../context/hooks/useAuth.jsx";
 
-// const PersonPage = () => {
-function PersonPage() {
+const PersonPage = () => {
+// function PersonPage() {
     const {personId, password} = useAuth();
 
     const person = usePerson((state) => state.person);
@@ -25,101 +25,69 @@ function PersonPage() {
             <CardHeader title="Contact Info">
                 <Typography variant="h5">Contact Info</Typography>
             </CardHeader>
-            <CardContent>
-                <TextField
-                    label="Surname"
-                    value={person.surname}
-                    // onChange={(e) => setSurname(e.target.value)}
-                />
-                <TextField
-                    label="Name"
-                    value={person.name}
-                    // onChange={(e) => setName(e.target.value)}
-                />
-                <TextField
-                    label="Patronymic"
-                    value={person.patronymic}
-                    // onChange={(e) => setPatronymic(e.target.value)}
-                />
-                <TextField
-                    label="Date of Birth"
-                    value={person.dateOfBirth}
-                    // onChange={(e) => setDateOfBirth(e.target.value)}
-                />
-                <TextField
-                    label="Email"
-                    value={person.email}
-                    // onChange={(e) => setEmail(e.target.value)}
-                />
-                <Button variant="outlined" color="primary" href="/main">
+            <CardContent
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}
+            >
+                <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                    Surname
+                </Typography>
+                <Typography>
+                    {person.surname}
+                </Typography>
+                <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                    Name
+                </Typography>
+                <Typography>
+                    {person.name}
+                </Typography>
+                <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                    Patronymic
+                </Typography>
+                <Typography>
+                    {person.patronymic}
+                </Typography>
+                <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                    Date of birth
+                </Typography>
+                <Typography>
+                    {person.dateOfBirth}
+                </Typography>
+                <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                    Email
+                </Typography>
+                <Typography>
+                    {person.email}
+                </Typography>
+            </CardContent>
+            <CardActions
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}
+            >
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    href="/main"
+
+                >
                     To main
                 </Button>
                 <Button
                     variant="outlined"
                     color="secondary"
-                    // href="/about"
                     onClick={onBtnClick}
+                    sx={{mt: '1rem'}}
                 >
-                    About
+                    More
                 </Button>
-            </CardContent>
+            </CardActions>
         </Card>
     );
-
-//     return (
-//         <Card>
-//             <CardHeader title="Contact Info">
-//                 <Typography variant="h5">Contact Info</Typography>
-//             </CardHeader>
-//             <CardContent>
-//                 <TextField
-//                     label="Surname"
-//                     value={1}
-//                     // onChange={(e) => setSurname(e.target.value)}
-//                 />
-//                 <TextField
-//                     label="Name"
-//                     value={name}
-//                     // onChange={(e) => setName(e.target.value)}
-//                 />
-//                 <TextField
-//                     label="Patronymic"
-//                     value={patronymic}
-//                     // onChange={(e) => setPatronymic(e.target.value)}
-//                 />
-//                 <TextField
-//                     label="Date of Birth"
-//                     value={dateOfBirth}
-//                     // onChange={(e) => setDateOfBirth(e.target.value)}
-//                 />
-//                 <TextField
-//                     label="Email"
-//                     value={email}
-//                     // onChange={(e) => setEmail(e.target.value)}
-//                 />
-//                 <Button
-//                     variant="outlined"
-//                     color="primary"
-//                     href="/main"
-//                 >
-//                     To main
-//                 </Button>
-//                 <Button
-//                     variant="outlined"
-//                     color="secondary"
-//                     href="/about"
-//                 >
-//                     About
-//                 </Button>
-//                 <Button
-//                     isLoading={loading}
-//                     onClick={fetchPerson}
-//                 >
-//                     {!error ? 'Get person' : { error }}
-//                 </Button>
-//             </CardContent>
-//         </Card>
-//     );
-// };
-};
+}
 export default PersonPage;

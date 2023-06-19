@@ -3,13 +3,7 @@ import axios from "../../api/axios_helper";
 import {create} from "zustand";
 
 export const usePerson = create(devtools((set) => ({
-    person: {
-        // surname: '',
-        // name: '',
-        // patronymic: '',
-        // dateOfbirth: '',
-        // email: ''
-    },
+    person: {},
     loading: false,
     error: null,
 
@@ -25,14 +19,11 @@ export const usePerson = create(devtools((set) => ({
                     withCredentials: true,
                     maxRedirects: 0
                 })
-
             set({
                 person: await response.data,
                 error: null,
-            });
-
-            // if (response.status !== 200) throw new Error('На жаль, не вдалося завантажити особисті дані. Спробуйте ще раз')
-
+                loading: false,
+            })
         } catch (error) {
             set({
                 error: error.message,
