@@ -22,8 +22,8 @@ const PersonPage = () => {
 
     return (
         <Card>
-            <CardHeader title="Contact Info">
-                <Typography variant="h5">Contact Info</Typography>
+            <CardHeader title="Інформація про користувача">
+                {/*<Typography variant="h5">Інформація про користувача</Typography>*/}
             </CardHeader>
             <CardContent
                 sx={{
@@ -33,31 +33,31 @@ const PersonPage = () => {
                 }}
             >
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                    Surname
+                    Прізвище
                 </Typography>
                 <Typography>
                     {person.surname}
                 </Typography>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                    Name
+                    Ім'я
                 </Typography>
                 <Typography>
                     {person.name}
                 </Typography>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                    Patronymic
+                    По батькові
                 </Typography>
                 <Typography>
                     {person.patronymic}
                 </Typography>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                    Date of birth
+                    Дата народження
                 </Typography>
                 <Typography>
                     {person.dateOfBirth}
                 </Typography>
                 <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                    Email
+                    Електронна пошта
                 </Typography>
                 <Typography>
                     {person.email}
@@ -76,7 +76,7 @@ const PersonPage = () => {
                     href="/main"
 
                 >
-                    To main
+                    На головну
                 </Button>
                 <Button
                     variant="outlined"
@@ -84,7 +84,7 @@ const PersonPage = () => {
                     onClick={onBtnClick}
                     sx={{mt: '1rem'}}
                 >
-                    More
+                    Детальніше
                 </Button>
             </CardActions>
         </Card>
